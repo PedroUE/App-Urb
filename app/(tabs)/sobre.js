@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, ScrollView } from "react-native"
+import { View, Text, StyleSheet, Image, ScrollView, Button } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const Foto = require("../../assets/Image.png")
@@ -26,6 +26,12 @@ export default function sobre() {
                         <Text style={styles.cardItem}>. Trabalho em equipe</Text>
                         <Text style={styles.cardItem}>. Inteligencia emocional</Text>
                     </View>
+                </View>
+                <View style={styles.botao}>
+                    <Button title="Clique 1" onProgress={() => {}}>
+                </Button>
+                    <Button title="Clique 2" onProgress={() => {}}>
+                </Button>
                 </View>
             </SafeAreaView>
         </ScrollView>
@@ -79,6 +85,14 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: '700',
         color: '#102542',
+    },
+    botao: {
+        justifyContent: 'center',
+        marginBottom: 20,
+        alignItems: 'center',
+        flexDirection: "row",
+        justifyContent: "space-between",
+        justifyContent: "space-around",
     },
     cardItem: {
         fontSize: 15,
