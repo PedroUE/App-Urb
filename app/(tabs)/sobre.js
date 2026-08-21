@@ -9,22 +9,22 @@ export default function sobre() {
             <SafeAreaView style={styles.safeArea}>
                 <View style={styles.container}>
                     <View style={styles.hero}>
+                        <Text style={styles.title}>Bem vindo</Text>
+                        <Text style={styles.subtitle}>sobre mim</Text>
                         <Image source={Foto} style={styles.foto} resizeMode="contain" />
-                        <Text style={styles.title}>Oi</Text>
-                        <Text style={styles.subtitle}>oiiiiiiii</Text>
                     </View>
 
                     <View style={styles.card}>
                         <Text style={styles.cardTitle}>Sobre mim</Text>
-                        <Text style={styles.description}>fffffffffffffffffffffff</Text>
+                        <Text style={styles.description}>Sou uma pessoa calma que adora desafios, estou sempre atrás aprendizado e constantemente de novos desafios!</Text>
                     </View>
 
                     <View style={styles.card}>
                         <Text style={styles.cardTitle}>Habilidades</Text>
-                        <Text style={styles.cardItem}>Hab1</Text>
-                        <Text style={styles.cardItem}>Hab2</Text>
-                        <Text style={styles.cardItem}>Hab3</Text>
-                        <Text style={styles.cardItem}>Hab4</Text>
+                        <Text style={styles.cardItem}>. Desenvolvedor de sistema</Text>
+                        <Text style={styles.cardItem}>. Comunicação</Text>
+                        <Text style={styles.cardItem}>. Trabalho em equipe</Text>
+                        <Text style={styles.cardItem}>. Inteligencia emocional</Text>
                     </View>
                 </View>
             </SafeAreaView>
@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
         width: 500,
         height: 160,
         marginBottom: 4,
+        borderRadius: 90,
     },
     title: {
         fontSize: 16,
