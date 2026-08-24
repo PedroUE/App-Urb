@@ -30,8 +30,10 @@ export default function sobre() {
                 <View style={styles.botao}>
                     <Button title="Clique 1" onProgress={() => {}}>
                 </Button>
+                </View>
+                <View style={styles.botao}>
                     <Button title="Clique 2" onProgress={() => {}}>
-                </Button>
+                    </Button>
                 </View>
             </SafeAreaView>
         </ScrollView>
