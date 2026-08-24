@@ -1,23 +1,10 @@
 import { useState } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  Pressable,
-  StyleSheet,
-  Alert,
-  ScrollView,
-} from "react-native";
+import { View, Text, TextInput, Pressable, StyleSheet, Alert, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import axios from "axios";
 
-// Em produção, uma chave de API não deveria morar direto no código do
-// app (dá pra extrair de qualquer APK/IPA instalado). Aqui, como é uma
-// API pública de estudo, deixamos direto no código pra simplificar.
-const API_KEY = "cv_cmYeFfT6W7Lr4b-uGwq-X4E5Mbn37ctBpugWExbIFGoNT0GzuhMvnxKHMH8WcSdo";
+const API_KEY = "cv_PoKQYX6JDrn6Azq2w-q_1kB0tbCmGhr3lZr2fDDWYXq5vD9GzNyamfc4gNxIdlJq";
 
-// Mesma instância do axios usada na tela de listagem, com o header já
-// configurado — toda chamada feita com "api" já sai autenticada.
 const api = axios.create({
   baseURL: "https://api-ds.codeverse.dev.br",
   headers: {
@@ -25,49 +12,44 @@ const api = axios.create({
   },
 });
 
-// ---------- POST: criar um herói novo ----------
-// Payload confirmado pra este tema: title, description e imageUrl
-// (genéricos) + universo, editora e grupo_principal (específicos do
-// tema heróis). category, year, ano_de_estreia, tipo_de_heroi e
-// situacao_do_heroi aparecem na documentação, mas não fazem parte do
-// corpo que a rota de criação realmente aceita.
-export default function HeroisCriarScreen() {
+
+export default function JogosCriarScreen() {
   const [titulo, setTitulo] = useState("");
   const [descricao, setDescricao] = useState("");
   const [imagemUrl, setImagemUrl] = useState("");
-  const [universo, setUniverso] = useState("");
-  const [editora, setEditora] = useState("");
-  const [grupoPrincipal, setGrupoPrincipal] = useState("");
+  const [status, setStatus] = useState("");
+  const [estudio, setEstudio] = useState("");
+  const [genero, setGenero] = useState("");
 
   const [enviando, setEnviando] = useState(false);
 
-  async function criarHeroi() {
+  async function criarJogo() {
     if (!titulo) {
-      Alert.alert("Preencha pelo menos o título.");
+      Alert.alert("Atenção, Preencha pelo menos o título do jogo.");
       return;
     }
 
     setEnviando(true);
     try {
-      const resposta = await api.post("/api/herois", {
+      const resposta = await api.post("/api/jogos", {
         title: titulo,
         description: descricao,
         imageUrl: imagemUrl,
-        universo,
-        editora,
-        grupo_principal: grupoPrincipal,
+        status: status,
+        estudio: estudio,
+        genero: genero,
       });
 
-      Alert.alert("Herói criado!", resposta.data.title);
+      Alert.alert("Jogo criado!", resposta.data.title);
       setTitulo("");
       setDescricao("");
       setImagemUrl("");
-      setUniverso("");
-      setEditora("");
-      setGrupoPrincipal("");
+      setStatus("");
+      setEstudio("");
+      setGenero("");
     } catch (e) {
       Alert.alert(
-        "Não deu pra criar o herói",
+        "Não deu pra criar o jogo",
         "A API respondeu com erro. Confere se todos os campos estão certinhos e tenta de novo."
       );
     } finally {
@@ -79,8 +61,8 @@ export default function HeroisCriarScreen() {
     <SafeAreaView style={styles.safeArea}>
       <ScrollView contentContainerStyle={styles.conteudo}>
         <View style={styles.header}>
-          <Text style={styles.tituloPagina}>Criar herói</Text>
-          <Text style={styles.subtitulo}>POST /api/herois</Text>
+          <Text style={styles.tituloPagina}>Criar jogo</Text>
+          <Text style={styles.subtitulo}>POST /api/jogos</Text>
         </View>
 
         <Text style={styles.rotulo}>Título</Text>
@@ -88,7 +70,7 @@ export default function HeroisCriarScreen() {
           style={styles.campo}
           value={titulo}
           onChangeText={setTitulo}
-          placeholder="Ex: Batman"
+          placeholder="Ex: The Legend of Zelda: Breath of the Wild"
         />
 
         <Text style={styles.rotulo}>Descrição</Text>
@@ -96,7 +78,7 @@ export default function HeroisCriarScreen() {
           style={styles.campo}
           value={descricao}
           onChangeText={setDescricao}
-          placeholder="Ex: Herói vigilante de Gotham City."
+          placeholder="Ex: The Legend of Zelda: Breath of the Wild em uma versao simplificada do tema Jogos."
         />
 
         <Text style={styles.rotulo}>URL da imagem</Text>
@@ -104,37 +86,37 @@ export default function HeroisCriarScreen() {
           style={styles.campo}
           value={imagemUrl}
           onChangeText={setImagemUrl}
-          placeholder="Ex: https://exemplo.com/batman.jpg"
+          placeholder="Ex: https://exemplo.com/zelda.png"
         />
 
-        <Text style={styles.secao}>Campos específicos do tema heróis</Text>
+        <Text style={styles.secao}>Campos específicos do tema jogos</Text>
 
-        <Text style={styles.rotulo}>Universo</Text>
+        <Text style={styles.rotulo}>status</Text>
         <TextInput
           style={styles.campo}
-          value={universo}
-          onChangeText={setUniverso}
-          placeholder="Ex: DC"
+          value={status}
+          onChangeText={setStatus}
+          placeholder="Ex: Lancado"
         />
 
-        <Text style={styles.rotulo}>Editora</Text>
+        <Text style={styles.rotulo}>estudio</Text>
         <TextInput
           style={styles.campo}
-          value={editora}
-          onChangeText={setEditora}
-          placeholder="Ex: DC Comics"
+          value={estudio}
+          onChangeText={setEstudio}
+          placeholder="Ex: Nintendo"
         />
 
-        <Text style={styles.rotulo}>Grupo principal</Text>
+        <Text style={styles.rotulo}>genero</Text>
         <TextInput
           style={styles.campo}
-          value={grupoPrincipal}
-          onChangeText={setGrupoPrincipal}
-          placeholder="Ex: Batfamily"
+          value={genero}
+          onChangeText={setGenero}
+          placeholder="Ex: aventura"
         />
 
-        <Pressable style={styles.botao} onPress={criarHeroi} disabled={enviando}>
-          <Text style={styles.botaoTexto}>{enviando ? "Enviando..." : "Criar herói"}</Text>
+        <Pressable style={styles.botao} onPress={criarJogo} disabled={enviando}>
+          <Text style={styles.botaoTexto}>{enviando ? "Enviando..." : "Criar jogo"}</Text>
         </Pressable>
       </ScrollView>
     </SafeAreaView>
@@ -142,10 +124,10 @@ export default function HeroisCriarScreen() {
 }
 
 const styles = StyleSheet.create({
-  safeArea: { flex: 1, backgroundColor: "#f8fbff" },
+  safeArea: { flex: 1, backgroundColor: "#af74e746" },
   conteudo: { padding: 24, paddingBottom: 48 },
   header: { marginBottom: 16 },
-  tituloPagina: { fontSize: 24, fontWeight: "800", color: "#102542" },
+  tituloPagina: { fontSize: 24, fontWeight: "800", color: "#522bc0e5" },
   subtitulo: { fontSize: 14, color: "#5f6b7a", marginTop: 2 },
   secao: {
     fontSize: 14,
@@ -155,10 +137,10 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
 
-  rotulo: { fontSize: 13, fontWeight: "600", color: "#334155", marginBottom: 4 },
+  rotulo: { fontSize: 13, fontWeight: "600", color: "#302525", marginBottom: 4 },
   campo: {
     borderWidth: 1,
-    borderColor: "#cbd5e1",
+    borderColor: "#1066cf",
     borderRadius: 8,
     paddingHorizontal: 12,
     paddingVertical: 10,
@@ -166,7 +148,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   botao: {
-    backgroundColor: "#1565c0",
+    backgroundColor: "#522bc0e5",
     paddingVertical: 14,
     borderRadius: 10,
     alignItems: "center",

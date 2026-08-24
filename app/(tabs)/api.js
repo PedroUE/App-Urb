@@ -3,7 +3,7 @@ import { View, Text, Image, ActivityIndicator, ScrollView, StyleSheet } from "re
 import axios from "axios" // lib usada pra fazer chamadas HTTP para API
 import { SafeAreaView } from "react-native-safe-area-context" // evita que conteudo fique embaixo do notch/barra do celular
 
-const API_KEY = "cv_cmYeFfT6W7Lr4b-uGwq-X4E5Mbn37ctBpugWExbIFGoNT0GzuhMvnxKHMH8WcSdo"
+const API_KEY = "cv_PoKQYX6JDrn6Azq2w-q_1kB0tbCmGhr3lZr2fDDWYXq5vD9GzNyamfc4gNxIdlJq"
 
 const api = axios.create({
     baseURL: "https://api-ds.codeverse.dev.br",
@@ -12,36 +12,36 @@ const api = axios.create({
     }
 })
 
-export default function HeroisListarScreen() {
-    const [herois, setHerois] = useState([])
+export default function JogosListarScreen() {
+    const [Jogos, setJogos] = useState([])
     const [carregando, setCarregando] = useState(true)
     const [erro, setErro] = useState(null)
 
-    async function buscarHerois() {
+    async function buscarJogos() {
         setCarregando(true)
         setErro(null)
         try {
-            const resposta = await api.get("/api/herois", {
+            const resposta = await api.get("/api/jogos", {
                 params: { limit: 50 }
             })
-            setHerois(resposta.data.data)
+            setJogos(resposta.data.data)
         } catch (error) {
-            setErro("Não foi possivel carregar herois")
+            setErro("Não foi possivel carregar jogos")
         } finally {
             setCarregando(false)
         }
     }
 
     useEffect(() => {
-        buscarHerois()
+        buscarJogos()
     }, [])
 
     return (
         <SafeAreaView style={styles.safeArea}>
             <ScrollView contentContainerStyle={styles.conteudo}>
                 <View style={styles.header}>
-                    <Text style={styles.tituloPagina}>Listar heróis</Text>
-                    <Text style={styles.subtitulo}>GET /api/herois</Text>
+                    <Text style={styles.tituloPagina}>Listar jogos</Text>
+                    <Text style={styles.subtitulo}>GET /api/Jogos</Text>
                 </View>
 
                 {carregando && <ActivityIndicator style={{ marginVertical: 16 }} />}
@@ -49,13 +49,13 @@ export default function HeroisListarScreen() {
                 {erro && <Text style={styles.erro}>{erro}</Text>}
 
                 {!carregando &&
-                    herois.map((heroi) => (
-                        <View key={heroi.id} style={styles.card}>
-                            <Image source={{ uri: heroi.imageUrl }} style={styles.imagem} />
+                    Jogos.map((jogo) => (
+                        <View key={jogo.id} style={styles.card}>
+                            <Image source={{ uri: jogo.imageUrl }} style={styles.imagem} />
                             <View style={styles.info}>
-                                <Text style={styles.titulo}>{heroi.title}</Text>
+                                <Text style={styles.titulo}>{jogo.title}</Text>
                                 <Text style={styles.categoria}>
-                                    {heroi.category} · {heroi.year}
+                                    {jogo.genero} · {jogo.estudio} . {jogo.status}
                                 </Text>
                             </View>
                         </View>
@@ -66,10 +66,10 @@ export default function HeroisListarScreen() {
 }
 
 const styles = StyleSheet.create({
-    safeArea: { flex: 1, backgroundColor: "#f8fbff" }, // ocupa a tela toda, cor de fundo clara
+    safeArea: { flex: 1, backgroundColor: "#af74e746" }, // ocupa a tela toda, cor de fundo clara
     conteudo: { padding: 24, paddingBottom: 48 }, // respiro nas bordas do conteúdo
     header: { marginBottom: 16 }, // espaço abaixo do cabeçalho
-    tituloPagina: { fontSize: 24, fontWeight: "800", color: "#102542" }, // título grande e escuro
+    tituloPagina: { fontSize: 24, fontWeight: "800", color: "#522bc0e5" }, // título grande e escuro
     subtitulo: { fontSize: 14, color: "#5f6b7a", marginTop: 2 }, // texto menor e mais claro, abaixo do título
 
     erro: { color: "#c62828", marginTop: 12 }, // texto de erro em vermelho
