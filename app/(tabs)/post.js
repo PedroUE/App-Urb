@@ -1,9 +1,19 @@
 import { useState } from "react";
-import { View, Text, TextInput, Pressable, StyleSheet, Alert, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  Pressable,
+  StyleSheet,
+  Alert,
+  ScrollView,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import axios from "axios";
 
-const API_KEY = "cv_PoKQYX6JDrn6Azq2w-q_1kB0tbCmGhr3lZr2fDDWYXq5vD9GzNyamfc4gNxIdlJq";
+
+const API_KEY = "cv_ndLe5pShAHm7xv7r3QjNNXLYxv5P3M9HRBHIQ0ILxNYRkRGz2khJI7SNrx9EZgEp";
+
 
 const api = axios.create({
   baseURL: "https://api-ds.codeverse.dev.br",
@@ -15,17 +25,16 @@ const api = axios.create({
 
 export default function JogosCriarScreen() {
   const [titulo, setTitulo] = useState("");
-  const [descricao, setDescricao] = useState("");
   const [imagemUrl, setImagemUrl] = useState("");
-  const [status, setStatus] = useState("");
-  const [estudio, setEstudio] = useState("");
   const [genero, setGenero] = useState("");
-
+  const [plataforma, setPlataforma] = useState("");
+  const [anoLancamento, setAnoLancamento] = useState("");
+  const [desenvolvedora, setDesenvolvedora] = useState("");
   const [enviando, setEnviando] = useState(false);
 
   async function criarJogo() {
     if (!titulo) {
-      Alert.alert("Atenção, Preencha pelo menos o título do jogo.");
+      Alert.alert("Preencha pelo menos o título.");
       return;
     }
 
@@ -33,25 +42,26 @@ export default function JogosCriarScreen() {
     try {
       const resposta = await api.post("/api/jogos", {
         title: titulo,
-        description: descricao,
-        imageUrl: imagemUrl,
-        status: status,
-        estudio: estudio,
+        imageUrl: imagemUrl || null,
         genero: genero,
+        plataforma: plataforma,
+        ano_lancamento: Number(anoLancamento),
+        desenvolvedora: desenvolvedora,
       });
 
       Alert.alert("Jogo criado!", resposta.data.title);
       setTitulo("");
-      setDescricao("");
       setImagemUrl("");
-      setStatus("");
-      setEstudio("");
       setGenero("");
+      setPlataforma("");
+      setAnoLancamento("");
+      setDesenvolvedora("");
     } catch (e) {
       Alert.alert(
         "Não deu pra criar o jogo",
         "A API respondeu com erro. Confere se todos os campos estão certinhos e tenta de novo."
       );
+      console.error(e.message);
     } finally {
       setEnviando(false);
     }
@@ -70,15 +80,7 @@ export default function JogosCriarScreen() {
           style={styles.campo}
           value={titulo}
           onChangeText={setTitulo}
-          placeholder="Ex: The Legend of Zelda: Breath of the Wild"
-        />
-
-        <Text style={styles.rotulo}>Descrição</Text>
-        <TextInput
-          style={styles.campo}
-          value={descricao}
-          onChangeText={setDescricao}
-          placeholder="Ex: The Legend of Zelda: Breath of the Wild em uma versao simplificada do tema Jogos."
+          placeholder="Ex: Fortnite"
         />
 
         <Text style={styles.rotulo}>URL da imagem</Text>
@@ -86,34 +88,41 @@ export default function JogosCriarScreen() {
           style={styles.campo}
           value={imagemUrl}
           onChangeText={setImagemUrl}
-          placeholder="Ex: https://exemplo.com/zelda.png"
+          placeholder="Ex: https://exemplo.com/fortnite.jpg"
         />
 
         <Text style={styles.secao}>Campos específicos do tema jogos</Text>
 
-        <Text style={styles.rotulo}>status</Text>
-        <TextInput
-          style={styles.campo}
-          value={status}
-          onChangeText={setStatus}
-          placeholder="Ex: Lancado"
-        />
-
-        <Text style={styles.rotulo}>estudio</Text>
-        <TextInput
-          style={styles.campo}
-          value={estudio}
-          onChangeText={setEstudio}
-          placeholder="Ex: Nintendo"
-        />
-
-        <Text style={styles.rotulo}>genero</Text>
+        <Text style={styles.rotulo}>Gênero</Text>
         <TextInput
           style={styles.campo}
           value={genero}
           onChangeText={setGenero}
-          placeholder="Ex: aventura"
+          placeholder="Ex: Ação"
         />
+
+        <Text style={styles.rotulo}>Plataforma</Text>
+        <TextInput
+          style={styles.campo}
+          value={plataforma}
+          onChangeText={setPlataforma}
+          placeholder="Ex: PC"
+        />
+
+        <Text style={styles.rotulo}>Ano de Lançamento</Text>
+        <TextInput
+          style={styles.campo}
+          value={anoLancamento}
+          onChangeText={setAnoLancamento}
+          placeholder="Ex: 2020"
+        />
+        <Text style={styles.rotulo}>Desenvolvedora</Text>
+        <TextInput
+          style={styles.campo}
+          value={desenvolvedora}
+          onChangeText={setDesenvolvedora}
+          placeholder="Ex: Epic Games"
+          />
 
         <Pressable style={styles.botao} onPress={criarJogo} disabled={enviando}>
           <Text style={styles.botaoTexto}>{enviando ? "Enviando..." : "Criar jogo"}</Text>
@@ -137,10 +146,10 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
 
-  rotulo: { fontSize: 13, fontWeight: "600", color: "#302525", marginBottom: 4 },
+  rotulo: { fontSize: 13, fontWeight: "600", color: "#334155", marginBottom: 4 },
   campo: {
     borderWidth: 1,
-    borderColor: "#1066cf",
+    borderColor: "#cbd5e1",
     borderRadius: 8,
     paddingHorizontal: 12,
     paddingVertical: 10,
@@ -148,7 +157,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   botao: {
-    backgroundColor: "#522bc0e5",
+    backgroundColor: "#1565c0",
     paddingVertical: 14,
     borderRadius: 10,
     alignItems: "center",

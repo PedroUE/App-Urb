@@ -1,14 +1,14 @@
 import { React, useState, useEffect } from "react"
 import { View, Text, Image, ActivityIndicator, ScrollView, StyleSheet } from "react-native"
-import axios from "axios" // lib usada pra fazer chamadas HTTP para API
-import { SafeAreaView } from "react-native-safe-area-context" // evita que conteudo fique embaixo do notch/barra do celular
+import axios from "axios" 
+import { SafeAreaView } from "react-native-safe-area-context"
 
-const API_KEY = "cv_PoKQYX6JDrn6Azq2w-q_1kB0tbCmGhr3lZr2fDDWYXq5vD9GzNyamfc4gNxIdlJq"
+const API_KEY = "cv_ndLe5pShAHm7xv7r3QjNNXLYxv5P3M9HRBHIQ0ILxNYRkRGz2khJI7SNrx9EZgEp"
 
 const api = axios.create({
     baseURL: "https://api-ds.codeverse.dev.br",
     headers: {
-        "x-api-key": API_KEY // passo pelo header a key da API
+        "x-api-key": API_KEY 
     }
 })
 
@@ -24,7 +24,7 @@ export default function JogosListarScreen() {
             const resposta = await api.get("/api/jogos", {
                 params: { limit: 50 }
             })
-            setJogos(resposta.data.data)
+        setJogos(resposta.data.data)
         } catch (error) {
             setErro("Não foi possivel carregar jogos")
         } finally {
@@ -66,23 +66,23 @@ export default function JogosListarScreen() {
 }
 
 const styles = StyleSheet.create({
-    safeArea: { flex: 1, backgroundColor: "#af74e746" }, // ocupa a tela toda, cor de fundo clara
-    conteudo: { padding: 24, paddingBottom: 48 }, // respiro nas bordas do conteúdo
-    header: { marginBottom: 16 }, // espaço abaixo do cabeçalho
-    tituloPagina: { fontSize: 24, fontWeight: "800", color: "#522bc0e5" }, // título grande e escuro
-    subtitulo: { fontSize: 14, color: "#5f6b7a", marginTop: 2 }, // texto menor e mais claro, abaixo do título
+    safeArea: { flex: 1, backgroundColor: "#af74e746" },
+    conteudo: { padding: 24, paddingBottom: 48 }, 
+    header: { marginBottom: 16 },
+    tituloPagina: { fontSize: 24, fontWeight: "800", color: "#522bc0e5" }, 
+    subtitulo: { fontSize: 14, color: "#5f6b7a", marginTop: 2 }, 
 
-    erro: { color: "#c62828", marginTop: 12 }, // texto de erro em vermelho
+    erro: { color: "#c62828", marginTop: 12 }, 
     card: {
-        flexDirection: "row", // imagem e texto lado a lado
-        gap: 12, // espaço entre imagem e texto
-        marginTop: 12, // espaço entre um card e outro
+        flexDirection: "row", 
+        gap: 12, 
+        marginTop: 12, 
         backgroundColor: "white",
-        borderRadius: 10, // cantos arredondados
-        overflow: "hidden", // corta a imagem nos cantos arredondados do card
+        borderRadius: 10, 
+        overflow: "hidden", 
     },
-    imagem: { width: 64, height: 64 }, // tamanho fixo da foto do herói
-    info: { flex: 1, justifyContent: "center", paddingRight: 12 }, // ocupa o espaço que sobra ao lado da imagem
-    titulo: { fontSize: 16, fontWeight: "700" }, // nome do herói em destaque
-    categoria: { fontSize: 13, color: "#64748b" }, // categoria/ano em cinza, menor
+    imagem: { width: 64, height: 64 },
+    info: { flex: 1, justifyContent: "center", paddingRight: 12 }, 
+    titulo: { fontSize: 16, fontWeight: "700" },
+    categoria: { fontSize: 13, color: "#64748b" },
 });
