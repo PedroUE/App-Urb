@@ -54,6 +54,13 @@ export default function TabsLayout() {
           headerTitle: "Conteúdo - update",
         }}
       />
+      <Tabs.Screen
+        name="getById"
+        options={{
+          title: "Get by ID",
+          headerTitle: "Conteúdo - Get by ID",
+        }}
+      />
     </Tabs>
   );
 }
