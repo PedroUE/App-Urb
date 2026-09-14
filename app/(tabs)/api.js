@@ -1,14 +1,14 @@
 import { React, useState, useEffect } from "react"
 import { View, Text, Image, ActivityIndicator, ScrollView, StyleSheet } from "react-native"
-import axios from "axios" 
+import axios from "axios"
 import { SafeAreaView } from "react-native-safe-area-context"
 
-const API_KEY = "cv_ndLe5pShAHm7xv7r3QjNNXLYxv5P3M9HRBHIQ0ILxNYRkRGz2khJI7SNrx9EZgEp"
+const API_KEY = 'cv_L7Urk0CcrSlQQe0Xn812A0cPmLfe15djWWVXm1cIszytSpwpWWJSPNwheO7JyCOj';
 
 const api = axios.create({
     baseURL: "https://api-ds.codeverse.dev.br",
     headers: {
-        "x-api-key": API_KEY 
+        "x-api-key": API_KEY
     }
 })
 
@@ -67,22 +67,22 @@ export default function JogosListarScreen() {
 
 const styles = StyleSheet.create({
     safeArea: { flex: 1, backgroundColor: "#af74e746" },
-    conteudo: { padding: 24, paddingBottom: 48 }, 
+    conteudo: { padding: 24, paddingBottom: 48 },
     header: { marginBottom: 16 },
-    tituloPagina: { fontSize: 24, fontWeight: "800", color: "#522bc0e5" }, 
-    subtitulo: { fontSize: 14, color: "#5f6b7a", marginTop: 2 }, 
+    tituloPagina: { fontSize: 24, fontWeight: "800", color: "#522bc0e5" },
+    subtitulo: { fontSize: 14, color: "#5f6b7a", marginTop: 2 },
 
-    erro: { color: "#c62828", marginTop: 12 }, 
+    erro: { color: "#c62828", marginTop: 12 },
     card: {
-        flexDirection: "row", 
-        gap: 12, 
-        marginTop: 12, 
+        flexDirection: "row",
+        gap: 12,
+        marginTop: 12,
         backgroundColor: "white",
-        borderRadius: 10, 
-        overflow: "hidden", 
+        borderRadius: 10,
+        overflow: "hidden",
     },
     imagem: { width: 64, height: 64 },
-    info: { flex: 1, justifyContent: "center", paddingRight: 12 }, 
+    info: { flex: 1, justifyContent: "center", paddingRight: 12 },
     titulo: { fontSize: 16, fontWeight: "700" },
     categoria: { fontSize: 13, color: "#64748b" },
 });
