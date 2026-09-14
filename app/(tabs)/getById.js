@@ -98,7 +98,7 @@ export default function JogosBuscarScreen() {
                             <Text style={styles.categoria}>
                                 {jogo.universo} · {jogo.plataforma} . {jogo.anoLancamento}
                             </Text>
-                            <Text style={styles.fraqueza}>Fraqueza: {jogo.fraqueza}</Text>
+                            <Text style={styles.descricao}>Descrição:{jogo.descricao}</Text>
                         </View>
                     </View>
                 )}
@@ -149,5 +149,5 @@ const styles = StyleSheet.create({
     info: { flex: 1, justifyContent: 'center', paddingRight: 12, gap: 2 },
     titulo: { fontSize: 17, fontWeight: '700' },
     categoria: { fontSize: 13, color: '#64748b' },
-    fraqueza: { fontSize: 13, color: '#64748b' },
+    descricao: { fontSize: 13, color: '#64748b' },
 });
