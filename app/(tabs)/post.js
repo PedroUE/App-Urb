@@ -41,15 +41,15 @@ export default function JogosCriarScreen() {
     setEnviando(true);
     try {
       const resposta = await api.post("/api/jogos", {
-        title: titulo,
+        nome: titulo,
         imageUrl: imagemUrl || null,
         genero: genero,
         plataforma: plataforma,
         ano_lancamento: Number(anoLancamento),
-        desenvolvedora: desenvolvedora,
+        estudio: desenvolvedora,
       });
 
-      Alert.alert("Jogo criado!", resposta.data.title);
+      Alert.alert("Jogo criado!", resposta.data.nome);
       setTitulo("");
       setImagemUrl("");
       setGenero("");
