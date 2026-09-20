@@ -52,7 +52,7 @@ export default function JogosExcluirScreen() {
   function confirmarExclusao(jogo) {
     Alert.alert(
       "Excluir jogo",
-      `Tem certeza que quer excluir "${jogo.title}"? Essa ação não pode ser desfeita.`,
+      `Tem certeza que quer excluir "${jogo.nome}"? Essa ação não pode ser desfeita.`,
       [
         { text: "Cancelar", style: "cancel" },
         {
@@ -97,9 +97,9 @@ export default function JogosExcluirScreen() {
             <View key={item.id} style={styles.card}>
               <Image source={{ uri: item.imageUrl }} style={styles.imagem} />
               <View style={styles.info}>
-                <Text style={styles.titulo}>{item.title}</Text>
+                <Text style={styles.titulo}>{item.nome}</Text>
                 <Text style={styles.categoria}>
-                  {item.universo} · {item.poder}
+                  {item.genero} · {item.plataforma}
                 </Text>
               </View>
               <Pressable
