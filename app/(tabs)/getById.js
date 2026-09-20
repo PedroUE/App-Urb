@@ -94,9 +94,9 @@ export default function JogosBuscarScreen() {
                     <View style={styles.card}>
                         <Image source={{ uri: jogo.imageUrl }} style={styles.imagem} />
                         <View style={styles.info}>
-                            <Text style={styles.titulo}>{jogo.title}</Text>
+                            <Text style={styles.titulo}>{jogo.nome}</Text>
                             <Text style={styles.categoria}>
-                                {jogo.universo} · {jogo.plataforma} . {jogo.anoLancamento}
+                                {jogo.genero} · {jogo.plataforma} . {jogo.ano_lancamento}
                             </Text>
                             <Text style={styles.descricao}>Descrição:{jogo.descricao}</Text>
                         </View>
