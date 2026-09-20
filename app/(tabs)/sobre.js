@@ -28,11 +28,11 @@ export default function sobre() {
                     </View>
                 </View>
                 <View style={styles.botao}>
-                    <Button title="Clique 1" onProgress={() => {}}>
+                    <Button title="Clique 1" onPress={() => {}}>
                 </Button>
                 </View>
                 <View style={styles.botao}>
-                    <Button title="Clique 2" onProgress={() => {}}>
+                    <Button title="Clique 2" onPress={() => {}}>
                     </Button>
                 </View>
             </SafeAreaView>
