@@ -33,20 +33,20 @@ export default function JogosCriarScreen() {
   const [enviando, setEnviando] = useState(false);
 
   async function criarJogo() {
-    if (!titulo) {
-      Alert.alert("Preencha pelo menos o título.");
+    if (!titulo || !genero || !plataforma) {
+      Alert.alert("Preencha pelo menos o título o genero e a plataforma");
       return;
     }
 
     setEnviando(true);
     try {
       const resposta = await api.post("/api/jogos", {
-        nome: titulo,
-        imageUrl: imagemUrl || null,
+        title: titulo,
+        imageUrl: imagemUrl || "https://exemplo.com/imagem.png",
         genero: genero,
         plataforma: plataforma,
         ano_lancamento: Number(anoLancamento),
-        estudio: desenvolvedora,
+        desenvolvedora: desenvolvedora,
       });
 
       Alert.alert("Jogo criado!", resposta.data.nome);
