@@ -32,12 +32,12 @@ export default function JogosEditarScreen() {
 
     const [selecionado, setSelecionado] = useState(null);
 
-    const [nome, setNome] = useState('');
+    const [titulo, setTitulo] = useState('');
     const [imagemUrl, setImagemUrl] = useState('');
     const [genero, setGenero] = useState('');
     const [plataforma, setPlataforma] = useState('');
-    const [ano_lancamento, setAnoLancamento] = useState('');
-    const [estudio, setEstudio] = useState('');
+    const [anoLancamento, setAnoLancamento] = useState('');
+    const [desenvolvedora, setDesenvolvedora] = useState('');
     const [salvando, setSalvando] = useState(false);
 
     async function buscarJogos() {
@@ -61,17 +61,17 @@ export default function JogosEditarScreen() {
 
     function selecionarJogo(jogo) {
         setSelecionado(jogo);
-        setNome(jogo.nome ?? '');
+        setTitulo(jogo.title ?? '');
         setImagemUrl(jogo.imageUrl ?? '');
         setGenero(jogo.genero ?? '');
         setPlataforma(jogo.plataforma ?? '');
-        setAnoLancamento(jogo.ano_lancamento ?? '');
-        setEstudio(jogo.estudio ?? '');
+        setAnoLancamento(jogo.anoLancamento ?? '');
+        setDesenvolvedora(jogo.desenvolvedora ?? '');
     }
 
     async function salvarEdicao() {
         if (!selecionado) return;
-        if (!nome) {
+        if (!titulo) {
             Alert.alert('Preencha pelo menos o título.');
             return;
         }
@@ -80,16 +80,16 @@ export default function JogosEditarScreen() {
         try {
 
             const resposta = await api.put(`/api/jogos/${selecionado.id}`, {
-                nome: nome,
+                title: titulo,
                 imageUrl: imagemUrl,
-                genero: genero,
-                plataforma: plataforma,
-                ano_lancamento: Number(ano_lancamento),
-                estudio: estudio,
+                genero,
+                plataforma,
+                anoLancamento,
+                desenvolvedora,
             });
 
 
-            Alert.alert('Jogo atualizado!', resposta.data.nome);
+            Alert.alert('Jogo atualizado!', resposta.data.data.title);
 
             setSelecionado(null);
             buscarJogos();
@@ -124,7 +124,7 @@ export default function JogosEditarScreen() {
                                     key={item.id}
                                     style={styles.linha}
                                     onPress={() => selecionarJogo(item)}>
-                                    <Text style={styles.linhaTitulo}>{item.nome}</Text>
+                                    <Text style={styles.linhaTitulo}>{item.title}</Text>
                                     <Text style={styles.linhaSeta}>editar ›</Text>
                                 </Pressable>
                             ))}
@@ -140,8 +140,8 @@ export default function JogosEditarScreen() {
                         <Text style={styles.rotulo}>Título</Text>
                         <TextInput
                             style={styles.campo}
-                            value={nome}
-                            onChangeText={setNome}
+                            value={titulo}
+                            onChangeText={setTitulo}
                             placeholder="Ex: Batman"
                         />
 
@@ -172,7 +172,7 @@ export default function JogosEditarScreen() {
                         <Text style={styles.rotulo}>Ano de lançamento</Text>
                         <TextInput
                             style={styles.campo}
-                            value={ano_lancamento}
+                            value={anoLancamento}
                             onChangeText={setAnoLancamento}
                             placeholder="Ex: 2023"
                         />
@@ -180,8 +180,8 @@ export default function JogosEditarScreen() {
                         <Text style={styles.rotulo}>Desenvolvedora</Text>
                         <TextInput
                             style={styles.campo}
-                            value={estudio}
-                            onChangeText={setEstudio}
+                            value={desenvolvedora}
+                            onChangeText={setDesenvolvedora}
                             placeholder="Ex: Epic Games"
                         />
 
