@@ -27,10 +27,10 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
-        name="create"
+        name="get"
         options={{
-          title: "Create",
-          headerTitle: "Conteúdo - Create",
+          title: "Get",
+          headerTitle: "Conteúdo - Get",
         }}
       />
       <Tabs.Screen
