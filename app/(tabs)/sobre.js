@@ -27,13 +27,13 @@ export default function sobre() {
                         <Text style={styles.cardItem}>. Inteligencia emocional</Text>
                     </View>
                 </View>
-                <View style={styles.botao}>
-                    <Button title="Clique 1" onPress={() => {}}>
-                </Button>
-                </View>
-                <View style={styles.botao}>
-                    <Button title="Clique 2" onPress={() => {}}>
-                    </Button>
+                <View style={styles.containerBotoes}>
+                    <View style={styles.botao}>
+                        <Button title='Clique 1' onPress={() => {}} />
+                    </View>
+                    <View style={styles.botao}>
+                        <Button title='Clique 2' onPress={() => {}} />
+                    </View>
                 </View>
             </SafeAreaView>
         </ScrollView>
@@ -88,13 +88,16 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         color: '#102542',
     },
-    botao: {
+    containerBotoes: {
         justifyContent: 'center',
         marginBottom: 20,
         alignItems: 'center',
         flexDirection: "row",
         justifyContent: "space-between",
         justifyContent: "space-around",
+    },
+    botao: {
+        flex: 1,
     },
     cardItem: {
         fontSize: 15,
